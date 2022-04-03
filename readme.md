@@ -13,15 +13,10 @@ For Project Implementation Cluster.
 
 Download the zip file and unzip, Or
 
-Using npm
-```sh
-> npm install https://github.com/nfriedly/express-rate-limit/releases/download/v{version}/express-rate-limit.tgz
-```
-
 Using git
 in your terminal: 
 ```sh
->git clone https://github.com/lrdswag/TMPLNR-20.git
+>git clone https://github.com/2016lisali/jacks_garden_server.git
 ```
 
 Then open the file in your code editor, open the terminal and run 
