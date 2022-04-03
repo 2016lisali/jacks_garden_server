@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-rate-limit": "^6.3.0",
+    "express-slow-down": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "stripe": "^8.213.0",
+    "validator": "^13.7.0"
+  }
+}
