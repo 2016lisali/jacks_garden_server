@@ -11,7 +11,7 @@ For Project Implementation Cluster.
 
 ## Installation
 
-Download the zip file and unzip, Or
+1. Download the zip file and unzip, Or
 
 Using git
 in your terminal: 
@@ -19,10 +19,15 @@ in your terminal:
 >git clone https://github.com/2016lisali/jacks_garden_server.git
 ```
 
-Then open the file in your code editor, open the terminal and run 
+2. Then open the file in your code editor, open the terminal and run 
 ```
->npm install
+> npm install
 ```
+3. In editor terminal run
+```
+> npm start
+```
+the server will be running on http://localhost:5000
 
 ## Technologies 
 
