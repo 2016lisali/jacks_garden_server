@@ -6,7 +6,7 @@ export const createCart = (userId) => {
 }
 
 export const getCartDetailsByUserId = (userId) => {
-  return query("SELECT c.cartId, cd.productId, cd.quantity, p.productName, p.price, cd.quantity*p.price AS subtotal " +
+  return query("SELECT c.cartId, cd.productId, cd.quantity, p.productName, p.productImage, p.price, cd.quantity*p.price AS subtotal " +
     "FROM cart_details cd " +
     "INNER JOIN products p " +
     "ON cd.productId = p.productId " +

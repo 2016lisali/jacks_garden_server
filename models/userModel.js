@@ -10,7 +10,11 @@ const createAdmin = (firstName, lastName, email, password, isAdmin, dateCreate) 
   return query("INSERT INTO users (firstName, lastName, email, password, isAdmin, dateCreate) " +
     "VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, password, isAdmin, dateCreate])
 }
-
+// add email to mail list
+const addEmailToMailList = (email) => {
+  return query("INSERT INTO mailing_list (email) " +
+    "VALUES (?)", [email])
+}
 // get all user's info except password
 const getAllUsers = () => {
   return query("SELECT userId, firstName, lastName, email, isAdmin, dateCreate " +
@@ -39,4 +43,4 @@ const deleteUser = (userId) => {
   return query("DELETE FROM users " +
     " WHERE userId=? ", [userId])
 }
-export default { createUser, getAllUsers, getUserById, getUserBySearch, updateUser, deleteUser, createAdmin };
+export default { createUser, getAllUsers, getUserById, getUserBySearch, updateUser, deleteUser, createAdmin, addEmailToMailList };

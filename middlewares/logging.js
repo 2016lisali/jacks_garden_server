@@ -17,7 +17,7 @@ export const insertLog = async (req, res, next) => {
     const log = {
       ip: req.ip,
       userId: req.user?.id || 0,
-      usertype: req.user?.isAdmin,
+      usertype: req.user?.isAdmin || "announymous",
       method: req.method,
       totalRequests: req.totalRequest + 1,
       endpoint: req.url,

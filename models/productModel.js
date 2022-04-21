@@ -6,7 +6,7 @@ const createProduct = (productName, category, productDescription, productImage, 
 }
 
 const getAllProducts = () => {
-  return query("SELECT * FROM products")
+  return query("SELECT * FROM products ORDER BY productId Desc")
 }
 
 const getProductById = (productId) => {
@@ -16,7 +16,7 @@ const getProductById = (productId) => {
 
 const getProductBySearch = (productName, category) => {
   return query("SELECT * FROM products " +
-    "WHERE productName=? OR category=?", [productName, category])
+    "WHERE productName LIKE ? OR category=?", ['%' + productName + '%', category])
 }
 // const getProductByName = (productName) => {
 //   return query("SELECT * FROM products " +

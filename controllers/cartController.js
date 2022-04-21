@@ -25,9 +25,9 @@ export const addCartDetails = async (req, res) => {
   const { cartId, productId, quantity } = req.body;
   try {
     const result = await cartModel.addCartDetails(
-      validator.escape(cartId),
-      validator(productId),
-      validator(quantity));
+      cartId,
+      productId,
+      quantity);
     res.status(201).json("Product has been added to the cart");
   } catch (error) {
     console.log(error);
@@ -39,9 +39,9 @@ export const updateCartDetails = async (req, res) => {
   const { quantity, cartId, productId } = req.body;
   try {
     const result = await cartModel.updateCartDetails(
-      validator.escape(quantity),
-      validator.escape(cartId),
-      validator.escape(productId));
+      quantity,
+      cartId,
+      productId);
     if (result.affectedRows > 0) return res.status(200).json("Cart has been updated")
     res.status(204).json("Cart cannot be updated")
 

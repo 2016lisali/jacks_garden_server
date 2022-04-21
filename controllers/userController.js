@@ -11,11 +11,10 @@ export const createUser = async (req, res) => {
   try {
     // check if email already registered
     const existingUser = await userModel.getUserBySearch(user.email);
-    if (existingUser.length > 0) return res.status(400).json("User already exists.")
-    // check if confirm password is match
-    if (user.password !== user.confirmPassword) return res.status(400).json("Passwords do not match")
+    if (existingUser.length > 0) return res.status(400).json("User already exist.")
     // check if email address is valid
-    !validator.isEmail(user.email) && res.status(300).json("invalid email");
+    !validator.isEmail(user.email) && res.status(400).json("invalid email");
+
     // hash the password before insert it into database
     const hashedPassword = bcrypt.hashSync(user.password, 12);
     const now = new Date();
@@ -42,8 +41,6 @@ export const createAdmin = async (req, res) => {
     const existingAdmin = await userModel.getUserByEmail(admin.email);
     if (existingAdmin > 0) return res.status(400).json("Email adress already exists.")
     // check if confirm password is match
-    if (admin.password !== admin.confirmPassword) return res.status(400).json("Passwords do not match")
-    // check if email address is valid
     !validator.isEmail(admin.email) && res.status(300).json("invalid email");
     // hash the password before insert it into database
     const hashedPassword = bcrypt.hashSync(admin.password, 12);
@@ -75,8 +72,11 @@ export const getAllUsers = async (req, res) => {
 
 // get user by userId
 export const getUserById = async (req, res) => {
+  console.log("get User by id");
+  console.log(req.params.id);
   try {
-    const data = await userModel.getUserById(req.param.id);
+    const data = await userModel.getUserById(req.params.id);
+    console.log(data);
     res.status(200).json(data)
   } catch (error) {
     console.log(error);
@@ -150,9 +150,24 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );
-    res.status(200).json({ ...user[0], token })
+    res.status(200).json({ ...user[0], token, password: "" })
   } catch (error) {
     console.log(error);
-    res.status(500).json("getUserBySearch query error")
+    res.status(500).json("Login query error")
+  }
+}
+
+export const addEmail = async (req, res) => {
+  const { email } = req.body;
+  try {
+    if (validator.isEmail(email)) {
+      const data = await userModel.addEmailToMailList(email)
+      res.status(201).json("Email has been added to the mailing list.")
+    } else {
+      throw new Error("Email not valid")
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("query error")
   }
 }
