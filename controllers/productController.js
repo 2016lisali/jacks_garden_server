@@ -42,6 +42,7 @@ export const getProductById = async (req, res) => {
   }
 }
 export const getProductBySearch = async (req, res) => {
+  console.log("get product by search");
   const { productname, category } = req.query;
   try {
     const result = await productModel.getProductBySearch(

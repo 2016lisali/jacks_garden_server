@@ -9,12 +9,11 @@ export const createUser = async (req, res) => {
   const user = req.body;
   let data;
   try {
+    // check if email address is valid
+    if (!validator.isEmail(user.email)) return res.status(400).json("invalid email");
     // check if email already registered
     const existingUser = await userModel.getUserBySearch(user.email);
     if (existingUser.length > 0) return res.status(400).json("User already exist.")
-    // check if email address is valid
-    !validator.isEmail(user.email) && res.status(400).json("invalid email");
-
     // hash the password before insert it into database
     const hashedPassword = bcrypt.hashSync(user.password, 12);
     const now = new Date();
@@ -31,7 +30,6 @@ export const createUser = async (req, res) => {
     console.log(error);
     return res.status(500).json("usercontroller error. query error - failed to create user")
   }
-
 }
 // create Admin account
 export const createAdmin = async (req, res) => {
@@ -138,7 +136,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await userModel.getUserBySearch(email);
-    if (user.length === 0) return res.status(400).json({ message: "User does not exist." })
+    if (user.length === 0) return res.status(404).json({ message: "User does not exist." })
     const isPasswordCorrect = bcrypt.compareSync(password, user[0].password);
     if (!isPasswordCorrect) return res.status(400).json({ message: "Password is not match with the account." })
     // if the email and password both correcct, create a jwt token for the user, and send it to the user

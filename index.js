@@ -20,21 +20,17 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-// allow cross origin resource sharing 
-app.use(cors());
+// allow cross origin resource sharing
+const allowedOrigins = ['http://localhost:8000', 'http://localhost:3000']
+const corsOptions = {
+  origin: allowedOrigins,
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
-// lock web service to a whitelist of referrers
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
 app.use("/images", express.static("images"))
 //rate limiter
-// app.use('/api/', dayRateLimiter)
+app.use('/api/', dayRateLimiter)
 app.use('/api/', speedLimiter)
 app.use("/api/users", usersRoutes);
 app.use("/api/products", productsRoutes);

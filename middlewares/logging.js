@@ -3,7 +3,7 @@ import * as loggingRequest from "../models/loggingModel.js";
 const getTotalRequest = async (req, res, next) => {
   try {
     const result = await loggingRequest.getTotalRequest(req.ip);
-    req.totalRequest = result[result.length - 1].totalRequests;
+    result.length > 0 ? (req.totalRequest = result[result.length - 1].totalRequests) : (req.totalRequest = 0);
     next()
   } catch (error) {
     console.log(error);
@@ -13,11 +13,10 @@ const getTotalRequest = async (req, res, next) => {
 export const insertLog = async (req, res, next) => {
   getTotalRequest(req, res, async () => {
     const date = new Date();
-    // const formattedDate = date.toISOString.split("T")[0]
     const log = {
       ip: req.ip,
       userId: req.user?.id || 0,
-      usertype: req.user?.isAdmin || "announymous",
+      usertype: req.user?.isAdmin === 0 && "customer" || req.user?.isAdmin === 1 && "admin" || "announymous",
       method: req.method,
       totalRequests: req.totalRequest + 1,
       endpoint: req.url,
@@ -25,11 +24,9 @@ export const insertLog = async (req, res, next) => {
     }
     try {
       const result = await loggingRequest.addLog(log);
-      // console.log(result);
       next()
     } catch (error) {
       console.log(error.message);
     }
   })
-
 }

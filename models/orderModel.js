@@ -43,3 +43,14 @@ export const getOrderBillingDetailsByOrderId = (orderId) => {
   return query("SELECT * FROM orders_billing_details " +
     "WHERE orderId=?", [orderId])
 }
+
+export const updateOrderStatus = (status, orderId) => {
+  return query("UPDATE orders " +
+    "SET orderStatus=? " +
+    "WHERE orderId=?", [status, orderId])
+}
+
+export const deleteOrder = (orderId) => {
+  return query("DELETE FROM orders " +
+    "WHERE orderId=? ", [orderId])
+}

@@ -19,7 +19,6 @@ const query = (sql, parameters) => {
       }
     })
   })
-  console.log(res);
 }
 
 export default query;

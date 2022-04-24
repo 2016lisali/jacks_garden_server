@@ -1,6 +1,5 @@
 # Backend of Jack's Garden e-shop
 
-
 For Project Implementation Cluster.
 
 ## Requirements for Installation:
@@ -11,32 +10,39 @@ For Project Implementation Cluster.
 
 ## Installation
 
-1. Download the zip file and unzip, Or
+1. Import database.dump to your local Mysql database, and run the database server.
+
+2. Download the zip file and unzip, Or
 
 Using git
-in your terminal: 
+in your terminal:
+
 ```sh
 >git clone https://github.com/2016lisali/jacks_garden_server.git
 ```
 
-2. Then open the file in your code editor, open the terminal and run 
+3. Then open the file in your code editor, open the terminal and run
+
 ```
 > npm install
 ```
-3. In editor terminal run
+
+4. In editor terminal run
+
 ```
 > npm start
 ```
+
 the server will be running on http://localhost:5000
 
-## Technologies 
+## Technologies
 
-* jasonwebtoken
-* multer
-* mysql2
-* stripe
-* bcypt
-* validator
-* express-rate-limit
-* express-slow-down
-* cors
+- jasonwebtoken
+- multer
+- mysql2
+- stripe
+- bcypt
+- validator
+- express-rate-limit
+- express-slow-down
+- cors

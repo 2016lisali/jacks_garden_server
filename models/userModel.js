@@ -5,11 +5,7 @@ const createUser = (firstName, lastName, email, password, dateCreate) => {
   return query("INSERT INTO users (firstName, lastName, email, password, dateCreate) " +
     "VALUES (?, ?, ?, ?, ?)", [firstName, lastName, email, password, dateCreate])
 }
-// create admin user
-const createAdmin = (firstName, lastName, email, password, isAdmin, dateCreate) => {
-  return query("INSERT INTO users (firstName, lastName, email, password, isAdmin, dateCreate) " +
-    "VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, password, isAdmin, dateCreate])
-}
+
 // add email to mail list
 const addEmailToMailList = (email) => {
   return query("INSERT INTO mailing_list (email) " +
@@ -42,5 +38,11 @@ const updateUser = (userId, firstName, lastName, email, password) => {
 const deleteUser = (userId) => {
   return query("DELETE FROM users " +
     " WHERE userId=? ", [userId])
+}
+
+// create admin user
+const createAdmin = (firstName, lastName, email, password, isAdmin, dateCreate) => {
+  return query("INSERT INTO users (firstName, lastName, email, password, isAdmin, dateCreate) " +
+    "VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, password, isAdmin, dateCreate])
 }
 export default { createUser, getAllUsers, getUserById, getUserBySearch, updateUser, deleteUser, createAdmin, addEmailToMailList };
