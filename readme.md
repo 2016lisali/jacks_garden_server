@@ -18,7 +18,7 @@ Using git
 in your terminal:
 
 ```sh
->git clone https://github.com/2016lisali/jacks_garden_server.git
+> git clone https://github.com/2016lisali/jacks_garden_server.git
 ```
 
 3. Then open the file in your code editor, open the terminal and run
