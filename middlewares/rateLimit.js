@@ -1,7 +1,7 @@
 import rateLimit from "express-rate-limit";
 import slowDown from "express-slow-down";
-const allowlist = ['92.168.1.108'];
 
+const allowlist = ['92.168.1.108'];
 // for a given request origin, a count is made of the requests, once the number of requests exceed the
 // specified limit , that request origin may no longer make more request in the given time frame
 export const dayRateLimiter = rateLimit({
@@ -14,5 +14,5 @@ export const dayRateLimiter = rateLimit({
 export const speedLimiter = slowDown({
   windowMs: 1000, // 1 second
   delayAfter: 1, // allow 1 requests per 1 second, then...
-  delayMs: 500, // begin adding 500ms of delay per request above 1:
+  delayMs: 1000, // begin adding 500ms of delay per request above 1:
 });

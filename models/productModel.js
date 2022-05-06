@@ -13,6 +13,12 @@ const getProductById = (productId) => {
   return query("SELECT * FROM products " +
     "WHERE productId=?", [productId])
 }
+const getProductAndOrderSummary = () => {
+  return query("SELECT " +
+    "(SELECT COUNT(productId)  from products) AS totalProducts, " +
+    "(SELECT COUNT(userId) as totalUsers from users) AS totalUsers " +
+    "FROM dual")
+}
 
 const getProductBySearch = (productName, category) => {
   return query("SELECT * FROM products " +
@@ -36,4 +42,4 @@ const deleteProduct = (ProductId) => {
     "WHERE productId=?", [ProductId])
 }
 
-export default { createProduct, getAllProducts, getProductById, getProductBySearch, updateProduct, deleteProduct }
+export default { createProduct, getAllProducts, getProductById, getProductBySearch, getProductAndOrderSummary, updateProduct, deleteProduct }

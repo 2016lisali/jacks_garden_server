@@ -26,7 +26,7 @@ const getUserById = (userId) => {
 const getUserBySearch = (email, firstName, lastName) => {
   return query("SELECT userId, firstName, lastName, email, password, isAdmin, dateCreate " +
     "FROM users " +
-    "WHERE email=? OR (firstName=? AND lastName=?)", [email, firstName, lastName])
+    "WHERE email=? OR (firstName=? or lastName=?)", [email, firstName, lastName])
 }
 //update user 
 const updateUser = (userId, firstName, lastName, email, password) => {

@@ -28,7 +28,7 @@ export const createUser = async (req, res) => {
     res.status(201).json(`user created with id ${data.insertId}, cart ${cart.insertId}`)
   } catch (error) {
     console.log(error);
-    return res.status(500).json("usercontroller error. query error - failed to create user")
+    return res.status(500).json("userController error. query error - failed to create user")
   }
 }
 // create Admin account
@@ -37,7 +37,7 @@ export const createAdmin = async (req, res) => {
   try {
     // check if email already registered
     const existingAdmin = await userModel.getUserByEmail(admin.email);
-    if (existingAdmin > 0) return res.status(400).json("Email adress already exists.")
+    if (existingAdmin > 0) return res.status(400).json("Email address already exists.")
     // check if confirm password is match
     !validator.isEmail(admin.email) && res.status(300).json("invalid email");
     // hash the password before insert it into database
@@ -54,7 +54,7 @@ export const createAdmin = async (req, res) => {
     res.status(201).json("Admin created with id " + data.insertId)
   } catch (error) {
     console.log(error);
-    res.status(500).json("usercontroller error. query error - failed to create user")
+    res.status(500).json("userController error. query error - failed to create user")
   }
 }
 // get all users
@@ -84,12 +84,19 @@ export const getUserById = async (req, res) => {
 //
 export const getUserBySearch = async (req, res) => {
   // not sure here should use req.body or req.params.email
-  const { username, email } = req.query;
-  const firstName = username?.split(" ")[0];
-  const lastName = username?.split(" ")[1];
+  const { name, email } = req.query;
+  const firstName = name?.split(" ")[0];
+  const lastName = name?.split(" ")[1];
+  console.log(email, firstName, lastName);
   try {
-    const data = await userModel.getUserBySearch(email, firstName, lastName);
-    res.status(200).json(data)
+    const data = await userModel.getUserBySearch(
+      email && validator.escape(email),
+      firstName && validator.escape(firstName),
+      lastName && validator.escape(lastName)
+    );
+    data.length > 0 ?
+      res.status(200).json(data) :
+      res.status(404).json("Can not find the user matching your search")
   } catch (error) {
     console.log(error);
     res.status(500).json("getUserBySearch query error")
@@ -136,10 +143,10 @@ export const login = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await userModel.getUserBySearch(email);
-    if (user.length === 0) return res.status(404).json({ message: "User does not exist." })
+    if (user.length === 0) return res.status(404).json("User does not exist.")
     const isPasswordCorrect = bcrypt.compareSync(password, user[0].password);
-    if (!isPasswordCorrect) return res.status(400).json({ message: "Password is not match with the account." })
-    // if the email and password both correcct, create a jwt token for the user, and send it to the user
+    if (!isPasswordCorrect) return res.status(400).json("Password is not match with the account.")
+    // if the email and password both correct, create a jwt token for the user, and send it to the user
     const token = jwt.sign(
       {
         id: user[0].userId,

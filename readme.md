@@ -12,14 +12,7 @@ For Project Implementation Cluster.
 
 1. Import database.dump to your local Mysql database, and run the database server.
 
-2. Download the zip file and unzip, Or
-
-Using git
-in your terminal:
-
-```sh
-> git clone https://github.com/2016lisali/jacks_garden_server.git
-```
+2. Download the zip file and unzip
 
 3. Then open the file in your code editor, open the terminal and run
 
@@ -37,9 +30,10 @@ the server will be running on http://localhost:5000
 
 ## Technologies
 
+- express
+- mysql2
 - jasonwebtoken
 - multer
-- mysql2
 - stripe
 - bcypt
 - validator

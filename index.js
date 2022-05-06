@@ -21,7 +21,7 @@ app.use(express.urlencoded({
 }));
 
 // allow cross origin resource sharing
-const allowedOrigins = ['http://localhost:8000', 'http://localhost:3000']
+const allowedOrigins = ['http://localhost:8080', 'http://localhost:3000', 'http://localhost:3001']
 const corsOptions = {
   origin: allowedOrigins,
   optionsSuccessStatus: 200

@@ -24,10 +24,14 @@ export const getOrderDetails = (orderId) => {
     "ON o.orderId = od.orderId AND o.orderId=? " +
     "INNER JOIN products p " +
     "ON od.productId=p.productId " +
-    "INNER JOIN orders_billing_details obd " +
-    "ON obd.orderId=o.orderId " +
     "INNER JOIN users u " +
     "ON u.userId=o.userId", [orderId])
+}
+export const getOrdersByUserId = (userId) => {
+  return query("SELECT o.orderId, o.orderDate, o.orderAmount, o.orderStatus, o.localPickup, o.comments, u.userId " +
+    "FROM users u " +
+    "INNER JOIN orders o " +
+    "ON u.userId=o.userId AND u.userId=? ", [userId])
 }
 export const getAllOrders = () => {
   return query("SELECT o.orderId, o.userId, o.orderDate, o.orderStatus, sum(od.quantity*od.priceEach) as total, u.email, u.firstName, u.lastName " +
@@ -42,6 +46,14 @@ export const getAllOrders = () => {
 export const getOrderBillingDetailsByOrderId = (orderId) => {
   return query("SELECT * FROM orders_billing_details " +
     "WHERE orderId=?", [orderId])
+}
+
+export const getOrderTotalAmount = () => {
+  return query("SELECT MONTH(orderDate) as month, sum(orderAmount) as totalAmount " +
+    "From orders " +
+    "GROUP BY month " +
+    "ORDER BY month"
+  )
 }
 
 export const updateOrderStatus = (status, orderId) => {

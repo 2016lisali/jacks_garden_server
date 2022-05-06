@@ -45,6 +45,19 @@ export const getOrderDetails = async (req, res) => {
   }
 }
 
+export const getOrdersByUserId = async (req, res) => {
+  console.log("get order details by userId");
+  try {
+    const result = await orderModel.getOrdersByUserId(req.params.id);
+    result.length > 0 ?
+      res.status(200).json(result) :
+      res.status(404).json("Order not found")
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Can not get order details, query error")
+  }
+}
+
 export const getAllOrders = async (req, res) => {
   try {
     const result = await orderModel.getAllOrders();
@@ -57,6 +70,15 @@ export const getAllOrders = async (req, res) => {
   }
 }
 
+export const getOrderSummary = async (req, res) => {
+  try {
+    const result = await orderModel.getOrderTotalAmount();
+    res.status(200).json(result)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
 export const getOrderBillingDetails = async (req, res) => {
   console.log("get Billing details");
   try {

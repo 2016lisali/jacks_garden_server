@@ -41,6 +41,16 @@ export const getProductById = async (req, res) => {
     res.status(500).json("Cannot get all products, query error")
   }
 }
+
+export const getProductAndOrderStat = async (req, res) => {
+  try {
+    const result = await productModel.getProductAndOrderSummary()
+    res.status(200).json(result)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Cannot get data, query error")
+  }
+}
 export const getProductBySearch = async (req, res) => {
   console.log("get product by search");
   const { productname, category } = req.query;
