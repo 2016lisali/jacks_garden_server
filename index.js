@@ -20,15 +20,15 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-// allow cross origin resource sharing
-const allowedOrigins = ['http://localhost:8080', 'http://localhost:3000', 'http://localhost:3001']
+// allow cross origin resource sharing and restrict to a white list of Ip addresses
+const allowedOrigins = ['http://localhost:50311', 'http://localhost:3002', 'http://localhost:3001']
 const corsOptions = {
   origin: allowedOrigins,
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
-
 app.use("/images", express.static("images"))
+
 //rate limiter
 app.use('/api/', dayRateLimiter)
 app.use('/api/', speedLimiter)
@@ -38,8 +38,9 @@ app.use("/api/carts", cartsRoutes);
 app.use("/api/checkout", stripeRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/uploadfiles", uploadRoutes);
+
 app.get('/api', (req, res) => {
-  res.send("Hello to Jack's Garden API");
+  res.send("Welcome to Jack's Garden API");
 });
 
 app.listen(PORT, () => {
