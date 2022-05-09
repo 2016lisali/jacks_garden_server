@@ -40,3 +40,6 @@ the server will be running on http://localhost:5000
 - express-rate-limit
 - express-slow-down
 - cors
+
+clearDB_URL = mysql://b5c3f2ae918802:7e172524@us-cdbr-east-05.cleardb.net/heroku_9961dbe935c2cca?reconnect=true
+D2xhM6D6R{wd
