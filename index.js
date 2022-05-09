@@ -21,7 +21,7 @@ app.use(express.urlencoded({
 }));
 
 // allow cross origin resource sharing and restrict to a white list of Ip addresses
-const allowedOrigins = ['http://localhost:50311', 'http://localhost:3002', 'http://localhost:3001']
+const allowedOrigins = ['http://localhost:50311', 'http://localhost:3002', 'http://localhost:3001', '172.30.211.54']
 const corsOptions = {
   origin: allowedOrigins,
   optionsSuccessStatus: 200
