@@ -9,11 +9,10 @@ export const createUser = async (req, res) => {
   const user = req.body;
   let data;
   try {
-    // check if email address is valid
-    if (!validator.isEmail(user.email)) return res.status(400).json("invalid email");
     // check if email already registered
     const existingUser = await userModel.getUserBySearch(user.email);
     if (existingUser.length > 0) return res.status(400).json("User already exist.")
+    if (user.password != user.confirmPassword) return res.status(400).json("Password must match")
     // hash the password before insert it into database
     const hashedPassword = bcrypt.hashSync(user.password, 12);
     const now = new Date();
@@ -22,6 +21,7 @@ export const createUser = async (req, res) => {
       validator.escape(user.lastName),
       validator.escape(user.email),
       hashedPassword,
+      validator.escape(user.isAdmin),
       now
     )
     const cart = await createCart(data.insertId)
@@ -114,8 +114,10 @@ export const updateUser = async (req, res) => {
       validator.escape(user.firstName),
       validator.escape(user.lastName),
       validator.escape(user.email),
-      hashedPassword
+      hashedPassword,
+      user.isAdmin
     )
+    console.log(data);
     data.affectedRows > 0 ?
       res.status(200).json("User updated") :
       res.status(404).json("User not found")
@@ -140,6 +142,7 @@ export const deleteUser = async (req, res) => {
 
 // login user
 export const login = async (req, res) => {
+  console.log("login");
   const { email, password } = req.body
   try {
     const user = await userModel.getUserBySearch(email);
@@ -165,12 +168,10 @@ export const login = async (req, res) => {
 export const addEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    if (validator.isEmail(email)) {
-      const data = await userModel.addEmailToMailList(email)
-      res.status(201).json("Email has been added to the mailing list.")
-    } else {
-      throw new Error("Email not valid")
-    }
+    const isExisted = await userModel.getUserBySearch(email);
+    if (isExisted.length > 0) return res.status(400).json("Email already exist.")
+    await userModel.addEmailToMailList(email)
+    res.status(201).json("Email has been added to the mailing list.")
   } catch (error) {
     console.log(error);
     res.status(500).json("query error")

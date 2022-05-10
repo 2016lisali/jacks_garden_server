@@ -1,9 +1,9 @@
 import query from '../database.js';
 
 // create user
-const createUser = (firstName, lastName, email, password, dateCreate) => {
-  return query("INSERT INTO users (firstName, lastName, email, password, dateCreate) " +
-    "VALUES (?, ?, ?, ?, ?)", [firstName, lastName, email, password, dateCreate])
+const createUser = (firstName, lastName, email, password, isAdmin, dateCreate) => {
+  return query("INSERT INTO users (firstName, lastName, email, password, isAdmin, dateCreate) " +
+    "VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, password, isAdmin, dateCreate])
 }
 
 // add email to mail list
@@ -29,10 +29,10 @@ const getUserBySearch = (email, firstName, lastName) => {
     "WHERE email=? OR (firstName=? or lastName=?)", [email, firstName, lastName])
 }
 //update user 
-const updateUser = (userId, firstName, lastName, email, password) => {
+const updateUser = (userId, firstName, lastName, email, password, isAdmin) => {
   return query("UPDATE users " +
-    "SET firstName=?, lastName=?, email=?, password=? " +
-    "WHERE userId=?", [firstName, lastName, email, password, userId])
+    "SET firstName=?, lastName=?, email=?, password=?, isAdmin=? " +
+    "WHERE userId=?", [firstName, lastName, email, password, isAdmin, userId])
 }
 //delete user
 const deleteUser = (userId) => {
