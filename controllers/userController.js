@@ -17,11 +17,11 @@ export const createUser = async (req, res) => {
     const hashedPassword = bcrypt.hashSync(user.password, 12);
     const now = new Date();
     data = await userModel.createUser(
-      validator.escape(user.firstName),
-      validator.escape(user.lastName),
-      validator.escape(user.email),
+      user.firstName,
+      user.lastName,
+      user.email,
       hashedPassword,
-      validator.escape(user.isAdmin),
+      user.isAdmin,
       now
     )
     const cart = await createCart(data.insertId)
@@ -31,32 +31,7 @@ export const createUser = async (req, res) => {
     return res.status(500).json("userController error. query error - failed to create user")
   }
 }
-// create Admin account
-export const createAdmin = async (req, res) => {
-  const admin = req.body;
-  try {
-    // check if email already registered
-    const existingAdmin = await userModel.getUserByEmail(admin.email);
-    if (existingAdmin > 0) return res.status(400).json("Email address already exists.")
-    // check if confirm password is match
-    !validator.isEmail(admin.email) && res.status(300).json("invalid email");
-    // hash the password before insert it into database
-    const hashedPassword = bcrypt.hashSync(admin.password, 12);
-    const now = new Date();
-    const data = await userModel.createAdmin(
-      validator.escape(admin.firstName),
-      validator.escape(admin.lastName),
-      validator.escape(admin.email),
-      hashedPassword,
-      1,
-      now
-    )
-    res.status(201).json("Admin created with id " + data.insertId)
-  } catch (error) {
-    console.log(error);
-    res.status(500).json("userController error. query error - failed to create user")
-  }
-}
+
 // get all users
 export const getAllUsers = async (req, res) => {
   try {
@@ -87,12 +62,10 @@ export const getUserBySearch = async (req, res) => {
   const { name, email } = req.query;
   const firstName = name?.split(" ")[0];
   const lastName = name?.split(" ")[1];
-  console.log(email, firstName, lastName);
+
   try {
     const data = await userModel.getUserBySearch(
-      email && validator.escape(email),
-      firstName && validator.escape(firstName),
-      lastName && validator.escape(lastName)
+      email, firstName, lastName
     );
     data.length > 0 ?
       res.status(200).json(data) :
@@ -111,9 +84,9 @@ export const updateUser = async (req, res) => {
   try {
     const data = await userModel.updateUser(
       user.userId,
-      validator.escape(user.firstName),
-      validator.escape(user.lastName),
-      validator.escape(user.email),
+      user.firstName,
+      user.lastName,
+      user.email,
       hashedPassword,
       user.isAdmin
     )
