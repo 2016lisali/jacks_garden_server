@@ -22,11 +22,12 @@ app.use(express.urlencoded({
 
 // allow cross origin resource sharing and restrict to a white list of Ip addresses
 // const allowedOrigins = ['https://jacksgardenadmin.netlify.app', 'http://localhost:3002', 'http://localhost:3001', '172.30.211.54']
-const corsOptions = {
-  // origin: allowedOrigins,
-  optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: allowedOrigins,
+//   optionsSuccessStatus: 200
+// }
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use("/images", express.static("images"))
 
 //rate limiter
