@@ -21,7 +21,8 @@ app.use(express.urlencoded({
 }));
 
 // allow cross origin resource sharing and restrict to a white list of Ip addresses
-// const allowedOrigins = ['https://jacksgardenadmin.netlify.app', 'http://localhost:3002', 'http://localhost:3001', '172.30.211.54']
+// const allowedOrigins_store = ['https://jacksgarden.netlify.app']
+// const allowedOrigins_admin_panel = ['https://jacksgardenadmin.netlify.app']
 // const corsOptions = {
 //   origin: allowedOrigins,
 //   optionsSuccessStatus: 200

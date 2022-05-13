@@ -1,4 +1,3 @@
-import validator from 'validator';
 import userModel from '../models/userModel.js';
 import { createCart, deleteCart, emptyCart } from '../models/cartModel.js';
 import bcrypt from 'bcrypt';

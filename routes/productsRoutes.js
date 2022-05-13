@@ -5,6 +5,9 @@ import {
 import { verifyToken, verifyTokenAndAdmin } from '../middlewares/verifyToken.js';
 import { insertLog } from '../middlewares/logging.js';
 import express from 'express';
+import { checkSchema } from 'express-validator';
+import { validate, createAndUpdateProductSchema } from '../middlewares/dataValidator.js';
+import { cors_admin } from '../middlewares/accessControl';
 
 const router = express.Router();
 
@@ -12,8 +15,8 @@ router.get("/search", verifyToken, insertLog, getProductBySearch);
 router.get("/summary", verifyTokenAndAdmin, insertLog, getProductAndOrderStat)
 router.get("/", verifyToken, insertLog, getAllProducts);
 router.get("/:id", verifyToken, insertLog, getProductById);
-router.post("/", verifyTokenAndAdmin, insertLog, createProduct);
-router.patch("/:id", verifyTokenAndAdmin, insertLog, updateProduct);
+router.post("/", cors_admin, verifyTokenAndAdmin, insertLog, validate(checkSchema(createAndUpdateProductSchema)), createProduct);
+router.patch("/:id", verifyTokenAndAdmin, insertLog, validate(checkSchema(createAndUpdateProductSchema)), updateProduct);
 router.delete("/:id", verifyTokenAndAdmin, insertLog, deleteProduct);
 
 

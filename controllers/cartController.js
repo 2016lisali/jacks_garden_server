@@ -1,10 +1,9 @@
 import * as cartModel from "../models/cartModel.js";
-import validator from 'validator';
 
 export const createCart = async (req, res) => {
   const userId = req.query.userId
   try {
-    const result = await cartModel.createCart(validator.escape(userId))
+    const result = await cartModel.createCart(userId)
     res.status(201).json(result.insertId);
   } catch (error) {
     console.log(error);
