@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import usersRoutes from './routes/usersRoutes.js';
 import productsRoutes from './routes/productsRoutes.js';
@@ -8,6 +7,7 @@ import stripeRoutes from './routes/stripeRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import { dayRateLimiter, speedLimiter } from './middlewares/rateLimit.js';
+import { cors_admin, cors_storetore } from './middlewares/accessControl';
 
 const app = express();
 const PORT = process.env.PORT || 5000
@@ -28,17 +28,17 @@ app.use(express.urlencoded({
 //   optionsSuccessStatus: 200
 // }
 // app.use(cors(corsOptions));
-app.use(cors());
+// app.use(cors());
 app.use("/images", express.static("images"))
 
 //rate limiter
 app.use('/api/', dayRateLimiter)
 app.use('/api/', speedLimiter)
-app.use("/api/users", usersRoutes);
-app.use("/api/products", productsRoutes);
-app.use("/api/carts", cartsRoutes);
-app.use("/api/checkout", stripeRoutes);
-app.use("/api/orders", orderRoutes);
+app.use("/api/users", cors_admin, usersRoutes);
+app.use("/api/products", cors_admin, productsRoutes);
+app.use("/api/carts", cors_admin, cartsRoutes);
+app.use("/api/checkout", cors_admin, stripeRoutes);
+app.use("/api/orders", cors_admin, orderRoutes);
 app.use("/api/uploadfiles", uploadRoutes);
 
 app.get('/api', (req, res) => {

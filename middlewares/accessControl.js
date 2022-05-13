@@ -1,6 +1,6 @@
 import cors from 'cors';
-const allowedOrigins_store = ['https://jacksgarden.netlify.app']
-const allowedOrigins_admin = ['https://jacksgardenadmin.netlify.app', "192.168.1.108"]
+const allowedOrigins_store = ["https://jacksgarden.netlify.app", "https://jacksgardenadmin.netlify.app"]
+const allowedOrigins_admin = ["https://jacksgardenadmin.netlify.app", "192.168.1.108"]
 
 export const corsOptionsDelegate_admin = (req, origin, callback) => {
   const myIpAddress = req.socket.remoteAddress; // This is where you get the IP address from the request
@@ -12,7 +12,7 @@ export const corsOptionsDelegate_admin = (req, origin, callback) => {
   }
 }
 
-export const corsOptionsDelegate_store = (req, origin, callback) => {
+export const corsOptionsDelegate_store = (origin, callback) => {
   if (allowedOrigins_store.indexOf(origin) !== -1) {
     return callback(null, true)
   } else {

@@ -15,7 +15,7 @@ router.get("/search", verifyToken, insertLog, getProductBySearch);
 router.get("/summary", verifyTokenAndAdmin, insertLog, getProductAndOrderStat)
 router.get("/", verifyToken, insertLog, getAllProducts);
 router.get("/:id", verifyToken, insertLog, getProductById);
-router.post("/", cors_admin, verifyTokenAndAdmin, insertLog, validate(checkSchema(createAndUpdateProductSchema)), createProduct);
+router.post("/", verifyTokenAndAdmin, insertLog, validate(checkSchema(createAndUpdateProductSchema)), createProduct);
 router.patch("/:id", verifyTokenAndAdmin, insertLog, validate(checkSchema(createAndUpdateProductSchema)), updateProduct);
 router.delete("/:id", verifyTokenAndAdmin, insertLog, deleteProduct);
 
