@@ -7,7 +7,7 @@ import { insertLog } from '../middlewares/logging.js';
 import express from 'express';
 import { checkSchema } from 'express-validator';
 import { validate, createAndUpdateProductSchema } from '../middlewares/dataValidator.js';
-import { cors_admin } from '../middlewares/accessControl';
+
 
 const router = express.Router();
 

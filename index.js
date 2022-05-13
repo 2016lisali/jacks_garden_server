@@ -7,7 +7,7 @@ import stripeRoutes from './routes/stripeRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import { dayRateLimiter, speedLimiter } from './middlewares/rateLimit.js';
-import { cors_admin, cors_storetore } from './middlewares/accessControl';
+import { cors_admin, cors_store } from './middlewares/accessControl.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000
