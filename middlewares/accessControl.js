@@ -1,6 +1,6 @@
 import cors from 'cors';
 const allowedOrigins_store = ["https://jacksgarden.netlify.app", "https://jacksgardenadmin.netlify.app"]
-const allowedOrigins_admin = ["https://jacksgardenadmin.netlify.app", "https://jacksgarden.netlify.app", "192.168.1.108", "http://localhost:3002"]
+const allowedOrigins_admin = ["https://jacksgardenadmin.netlify.app", "https://jacksgarden.netlify.app", "192.168.1.108", "23.22.52.7", "http://localhost:3002"]
 
 const corsOptionsDelegate_admin = (req, callback) => {
   // allowedOrigins_admin.indexOf(myIpAddress) !== -1 || 
