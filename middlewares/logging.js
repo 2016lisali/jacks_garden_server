@@ -14,7 +14,8 @@ export const insertLog = async (req, res, next) => {
   getTotalRequest(req, res, async () => {
     const date = new Date();
     const log = {
-      ip: req.socket.remoteAddress, // get IP address from the req
+      ip: req.ip,
+      // ip: req.socket.remoteAddress, // get IP address from the req
       userId: req.user?.id || 0,
       usertype: req.user?.isAdmin || "announymous",
       method: req.method,

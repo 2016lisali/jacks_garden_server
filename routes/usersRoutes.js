@@ -7,15 +7,17 @@ import { validate, addMailingListSchema, createUserSchema, loginSchema, updateUs
 
 const router = express.Router()
 
+// Admin only routes
+router.get('/search', verifyTokenAndAdmin, insertLog, getUserBySearch);
+router.get('/', verifyTokenAndAdmin, insertLog, getAllUsers);
+router.delete('/:id', verifyTokenAndAdmin, insertLog, deleteUser);
+
 router.get('/:id', verifyTokenAndAuthentication, insertLog, getUserById);
 router.post('/register', verifyToken, insertLog, validate(checkSchema(createUserSchema)), createUser);
 router.post('/login', verifyToken, insertLog, validate(checkSchema(loginSchema)), login);
 router.post('/emails', verifyToken, insertLog, validate(checkSchema(addMailingListSchema)), addEmail);
 router.patch('/:id', verifyTokenAndAuthentication, validate(checkSchema(updateUserSchema)), insertLog, updateUser);
 
-// Admin only routes
-router.get('/search', verifyTokenAndAdmin, insertLog, getUserBySearch);
-router.get('/', verifyTokenAndAdmin, insertLog, getAllUsers);
-router.delete('/:id', verifyTokenAndAdmin, insertLog, deleteUser);
+
 
 export default router;

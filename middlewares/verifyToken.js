@@ -31,6 +31,8 @@ export const verifyTokenAndAuthentication = (req, res, next) => {
 export const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.user?.isAdmin) {
+      console.log("req.ip", req.ip);
+      console.log("req.socket.remoteAddress", req.socket.remoteAddress)
       next()
     } else {
       res.status(403).json("You are not authenticated.")
