@@ -315,7 +315,7 @@ export const createOrderBillingDetailsSchema = {
     errorMessage: "city field can not be empty and can not be over 20 characters."
   },
   state: {
-    notEmpty: true,
+    optional: true,
     isLength: { max: 20 },
     errorMessage: "state can not be empty and can not be over 20 characters."
   },
