@@ -10,10 +10,10 @@ import mysql from 'mysql2';
 // })
 // CONNECT TO clearDB
 const connection = mysql.createPool({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE
+  host: "us-cdbr-east-05.cleardb.net",
+  user: "b5c3f2ae918802",
+  password: "7e172524",
+  database: "heroku_9961dbe935c2cca"
 })
 // This wrapper will allow the use of promise functions so that we can use it in any async way along with expressJs
 const query = (sql, parameters) => {

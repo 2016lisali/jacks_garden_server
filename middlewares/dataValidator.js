@@ -288,12 +288,12 @@ export const createOrderBillingDetailsSchema = {
   name: {
     notEmpty: true,
     isAlpha: true,
-    errorMessage: "name field can not be empty and can only contain alphabets"
+    errorMessage: "name field cannot be empty and can only contain alphabets"
   },
   email: {
     optional: true,
-    isEmail: true,
-    errorMessage: "email cannot be empty, and can only be a valid email address"
+    // isEmail: true,
+    errorMessage: "email can only be a valid email address"
   },
 
   phone: {
@@ -310,7 +310,7 @@ export const createOrderBillingDetailsSchema = {
     errorMessage: "line 2 can not be over 45 characters."
   },
   city: {
-    notEmpty: true,
+    optional: true,
     isLength: { max: 20 },
     errorMessage: "city field can not be empty and can not be over 20 characters."
   },
