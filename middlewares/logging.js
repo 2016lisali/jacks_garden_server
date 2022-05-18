@@ -15,16 +15,15 @@ export const insertLog = async (req, res, next) => {
     const date = new Date();
     const log = {
       ip: req.ip,
-      // ip: req.socket.remoteAddress, // get IP address from the req
       userId: req.user?.id || 0,
-      usertype: req.user?.isAdmin || "announymous",
+      usertype: req.user?.isAdmin || "anonymous",
       method: req.method,
       totalRequests: req.totalRequest + 1,
       endpoint: req.url,
       timestamp: date,
     }
     try {
-      const result = await loggingRequest.addLog(log);
+      await loggingRequest.addLog(log);
       next()
     } catch (error) {
       console.log(error.message);

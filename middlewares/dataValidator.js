@@ -4,7 +4,6 @@ import { validationResult } from 'express-validator'
 export const validate = validations => {
   return async (req, res, next) => {
     await Promise.all(validations.map(validation => validation.run(req)));
-
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       return next();
@@ -203,17 +202,16 @@ export const createOrderSchema = {
   },
   orderAmount: {
     notEmpty: true,
-    isFloat: {
+    isInt: {
       options: {
         min: 0,
-        max: 1000
       }
     },
-    errorMessage: "Order amount field can not be empty and must between 0 and 1000"
+    errorMessage: "Order amount field can not be empty"
   },
   orderStatus: {
     notEmpty: true,
-    matches: { options: [/\b(?:paid)\b/] },
+    matches: { options: [/\b(?:Paid)\b/i] },
     errorMessage: "Order status cannot be empty, and can only be string paid"
   },
   localPickup: {
@@ -232,7 +230,7 @@ export const createOrderSchema = {
 export const updateOrderStatusSchema = {
   orderStatus: {
     notEmpty: true,
-    matches: { options: [/\b(?:paid|pending|completed)\b/] },
+    matches: { options: [/\b(?:paid|pending|completed)\b/i] },
     errorMessage: "Order status cannot be empty, and can only be string paid/pending/completed"
   }
 }

@@ -31,7 +31,8 @@ export const getOrdersByUserId = (userId) => {
   return query("SELECT o.orderId, o.orderDate, o.orderAmount, o.orderStatus, o.localPickup, o.comments, u.userId " +
     "FROM users u " +
     "INNER JOIN orders o " +
-    "ON u.userId=o.userId AND u.userId=? ", [userId])
+    "ON u.userId=o.userId AND u.userId=? " +
+    "ORDER BY o.orderDate DESC", [userId])
 }
 export const getAllOrders = () => {
   return query("SELECT o.orderId, o.userId, o.orderDate, o.orderStatus, sum(od.quantity*od.priceEach) as total, u.email, u.firstName, u.lastName " +

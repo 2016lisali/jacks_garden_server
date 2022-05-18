@@ -1,6 +1,8 @@
-# Backend of Jack's Garden e-shop
+# Backend of Jack's Garden online Store.
 
-For Project Implementation Cluster.
+This is the backend code of Jack's Garden Online Store. The online server is hosted on [https://jacks-garden-server.herokuapp.com](https://jacks-garden-server.herokuapp.com)
+
+You can find the e-shop code on [https://github.com/2016lisali/jacks_garden](https://github.com/2016lisali/jacks_garden) and the admin panel code on [https://github.com/2016lisali/jacks_garden_admin_panel](https://github.com/2016lisali/jacks_garden_admin_panel)
 
 ## Requirements for Installation:
 
@@ -30,16 +32,14 @@ the server will be running on http://localhost:5000
 
 ## Technologies
 
+- node
 - express
 - mysql2
 - jasonwebtoken
 - multer
 - stripe
 - bcypt
-- validator
+- express-validator
 - express-rate-limit
 - express-slow-down
 - cors
-
-clearDB_URL = mysql://b5c3f2ae918802:7e172524@us-cdbr-east-05.cleardb.net/heroku_9961dbe935c2cca?reconnect=true
-D2xhM6D6R{wd

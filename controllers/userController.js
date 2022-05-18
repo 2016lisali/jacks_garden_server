@@ -114,7 +114,6 @@ export const deleteUser = async (req, res) => {
 
 // login user
 export const login = async (req, res) => {
-  console.log("login");
   const { email, password } = req.body
   try {
     const user = await userModel.getUserBySearch(email);
