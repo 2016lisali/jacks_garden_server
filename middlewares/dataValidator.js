@@ -287,7 +287,10 @@ export const createOrderBillingDetailsSchema = {
   },
   name: {
     notEmpty: true,
-    isAlpha: true,
+    matches: /^[A-Za-z ]+$/,
+    isLength: {
+      max: 20
+    },
     errorMessage: "name field cannot be empty and can only contain alphabets"
   },
   email: {
