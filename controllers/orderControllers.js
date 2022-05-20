@@ -46,7 +46,6 @@ export const getOrderDetails = async (req, res) => {
 }
 
 export const getOrdersByUserId = async (req, res) => {
-  console.log("get order details by userId");
   try {
     const result = await orderModel.getOrdersByUserId(req.params.id);
     result.length > 0 ?
@@ -80,7 +79,6 @@ export const getOrderSummary = async (req, res) => {
   }
 }
 export const getOrderBillingDetails = async (req, res) => {
-  console.log("get Billing details");
   try {
     const result = await orderModel.getOrderBillingDetailsByOrderId(req.params.id);
     result.length > 0 ?
@@ -97,7 +95,6 @@ export const updateOrderStatus = async (req, res) => {
   const { orderStatus } = req.body
   try {
     const result = await orderModel.updateOrderStatus(orderStatus, orderId)
-    console.log(result);
     if (result.affectedRows > 0) {
       res.status(200).json("Order updated")
     } else {

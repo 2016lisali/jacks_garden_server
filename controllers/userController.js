@@ -44,8 +44,6 @@ export const getAllUsers = async (req, res) => {
 
 // get user by userId
 export const getUserById = async (req, res) => {
-  console.log("get User by id");
-  console.log(req.params.id);
   try {
     const data = await userModel.getUserById(req.params.id);
     console.log(data);
@@ -89,7 +87,6 @@ export const updateUser = async (req, res) => {
       hashedPassword,
       user.isAdmin
     )
-    console.log(data);
     data.affectedRows > 0 ?
       res.status(200).json("User updated") :
       res.status(404).json("User not found")

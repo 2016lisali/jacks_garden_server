@@ -41,7 +41,8 @@ export const getAllOrders = () => {
     "ON o.orderId = od.orderId " +
     "INNER JOIN users u " +
     "ON u.userId=o.userId " +
-    "group by od.orderId")
+    "GROUP BY od.orderId " +
+    "ORDER BY orderDate DESC")
 }
 
 export const getOrderBillingDetailsByOrderId = (orderId) => {

@@ -14,7 +14,7 @@ const addEmailToMailList = (email) => {
 // get all user's info except password
 const getAllUsers = () => {
   return query("SELECT userId, firstName, lastName, email, isAdmin, dateCreate " +
-    "FROM users")
+    "FROM users ORDER BY dateCreate DESC")
 }
 // get  user by userId
 const getUserById = (userId) => {

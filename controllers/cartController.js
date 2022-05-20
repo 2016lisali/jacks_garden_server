@@ -20,6 +20,7 @@ export const getCartDetailsByUserId = async (req, res) => {
     res.status(500).json("Cannot get cart details by userId")
   }
 }
+
 export const addCartDetails = async (req, res) => {
   const { cartId, productId, quantity } = req.body;
   try {
