@@ -145,3 +145,13 @@ export const addEmail = async (req, res) => {
     res.status(500).json("query error")
   }
 }
+
+export const getEmailList = async (req, res) => {
+  try {
+    const data = await userModel.getEmailList()
+    res.status(201).json(data)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("query error")
+  }
+}

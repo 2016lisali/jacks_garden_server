@@ -22,7 +22,16 @@ You can find the e-shop code on [https://github.com/2016lisali/jacks_garden](htt
 > npm install
 ```
 
-4. In editor terminal run
+4. Create a `.env` file in root folder and enter following fields for cloud database
+   ```env
+   JWT_SECRET = YOUR_JWT_SECRET
+   STRIPE_TEST_KEY = YOUR_STRIPE_KEY
+   HOST = YOUR_DB_HOST
+   DBUSER = YOUR_DB_USER
+   PASSWORD = YOUR_DB_PASSWORD
+   DATABASE = YOUR DATABASE
+   ```
+5. In editor terminal run
 
 ```
 > npm start

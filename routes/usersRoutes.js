@@ -1,6 +1,9 @@
 import express from 'express';
 import { checkSchema } from 'express-validator';
-import { createUser, getAllUsers, getUserById, getUserBySearch, login, updateUser, deleteUser, addEmail } from '../controllers/userController.js';
+import {
+  createUser, getAllUsers, getUserById, getUserBySearch, login,
+  updateUser, deleteUser, addEmail, getEmailList
+} from '../controllers/userController.js';
 import { verifyToken, verifyTokenAndAuthentication, verifyTokenAndAdmin } from '../middlewares/verifyToken.js';
 import { insertLog } from '../middlewares/logging.js';
 import { validate, addMailingListSchema, createUserSchema, loginSchema, updateUserSchema } from '../middlewares/dataValidator.js';
@@ -9,6 +12,7 @@ const router = express.Router()
 
 // Admin only routes
 router.get('/search', verifyTokenAndAdmin, insertLog, getUserBySearch);
+router.get('/emails', verifyTokenAndAdmin, insertLog, getEmailList)
 router.get('/', verifyTokenAndAdmin, insertLog, getAllUsers);
 router.delete('/:id', verifyTokenAndAdmin, insertLog, deleteUser);
 
