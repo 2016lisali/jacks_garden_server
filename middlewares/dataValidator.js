@@ -161,7 +161,6 @@ export const createAndUpdateProductSchema = {
     isLength: {
       max: 500
     },
-    escape: true,
     errorMessage: "product description field can not be empty and can not over 500 characters"
 
   },
@@ -305,20 +304,24 @@ export const createOrderBillingDetailsSchema = {
 
   line1: {
     notEmpty: true,
+    escape: true,
     errorMessage: "line1 can not be empty and can not over 45 characters",
   },
   line2: {
     optional: true,
+    escape: true,
     isLength: { max: 45 },
     errorMessage: "line 2 can not be over 45 characters."
   },
   city: {
     optional: true,
+    escape: true,
     isLength: { max: 20 },
     errorMessage: "city field can not be empty and can not be over 20 characters."
   },
   state: {
     optional: true,
+    escape: true,
     isLength: { max: 20 },
     errorMessage: "state can not be empty and can not be over 20 characters."
   },

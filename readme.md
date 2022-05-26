@@ -29,7 +29,7 @@ You can find the e-shop code on [https://github.com/2016lisali/jacks_garden](htt
    HOST = YOUR_DB_HOST
    DBUSER = YOUR_DB_USER
    PASSWORD = YOUR_DB_PASSWORD
-   DATABASE = YOUR DATABASE
+   DATABASE = YOUR_DB_NAME
    ```
 5. In editor terminal run
 
@@ -52,3 +52,12 @@ the server will be running on http://localhost:5000
 - express-rate-limit
 - express-slow-down
 - cors
+
+## Road Map
+
+- Limit login attempts
+- access token and refresh token
+- store token in cookies instead of localstorage
+- generate different salt for each user password
+- auth service such as firebase autho,
+- graphQL,

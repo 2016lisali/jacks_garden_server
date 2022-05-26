@@ -13,7 +13,9 @@ export const createUser = async (req, res) => {
     if (existingUser.length > 0) return res.status(400).json("User already exist.")
     if (user.password != user.confirmPassword) return res.status(400).json("Password must match")
     // hash the password before insert it into database
-    const hashedPassword = bcrypt.hashSync(user.password, 12);
+    // const hashedPassword = bcrypt.hashSync(user.password, 12);
+    // change salt to a random number between 20-40, instead of static 12
+    const hashedPassword = bcrypt.hashSync(user.password, Math.floor((Math.random() + 1) * 20));
     const now = new Date();
     data = await userModel.createUser(
       user.firstName,
@@ -46,7 +48,6 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   try {
     const data = await userModel.getUserById(req.params.id);
-    console.log(data);
     res.status(200).json(data)
   } catch (error) {
     console.log(error);
