@@ -5,7 +5,7 @@ const stripe = Stripe(process.env.STRIPE_TEST_KEY)
 export const makePayment = async (req, res) => {
   stripe.charges.create({
     source: req.body.tokenId,
-    amount: req.body.amount * 100,
+    amount: Math.round(req.body.amount * 100),
     currency: "aud"
   }, (stripeErr, stripeRes) => {
     if (stripeErr) {

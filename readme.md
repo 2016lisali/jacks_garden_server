@@ -60,4 +60,4 @@ the server will be running on http://localhost:5000
 - store token in cookies instead of localstorage
 - generate different salt for each user password
 - auth service such as firebase autho,
-- graphQL,
+- graphQL

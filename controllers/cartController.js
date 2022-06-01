@@ -65,7 +65,6 @@ export const deleteProductInCart = async (req, res) => {
 }
 
 export const emptyCart = async (req, res) => {
-  console.log("empty Cart");
   try {
     const result = await cartModel.emptyCart(req.params.id);
     if (result.affectedRows > 0) return res.status(200).json("Cart already emptied")
