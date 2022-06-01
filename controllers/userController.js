@@ -15,7 +15,7 @@ export const createUser = async (req, res) => {
     // hash the password before insert it into database
     // const hashedPassword = bcrypt.hashSync(user.password, 12);
     // change salt to a random number between 20-40, instead of static 12
-    const hashedPassword = bcrypt.hashSync(user.password, Math.floor((Math.random() + 1) * 20));
+    const hashedPassword = bcrypt.hashSync(user.password, Math.round((Math.random() + 1) * 10));
     const now = new Date();
     data = await userModel.createUser(
       user.firstName,
