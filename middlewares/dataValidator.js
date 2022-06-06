@@ -132,9 +132,10 @@ export const createCartDetailsSchema = {
     isInt: {
       options: {
         min: 1,
+        max: 10,
       }
     },
-    errorMessage: "quantity can not be null and can only be an integer"
+    errorMessage: "quantity can not be null and can only be an integer between 1 to 10"
   }
 }
 
@@ -143,7 +144,7 @@ export const createAndUpdateProductSchema = {
   productName: {
     notEmpty: true,
     escape: true,
-    matches: /^[A-Za-z0-9 -]+$/,
+    matches: { options: /^[A-Za-z0-9 -]+$/ },
     isLength: {
       max: 50
     },
@@ -169,7 +170,11 @@ export const createAndUpdateProductSchema = {
   },
   price: {
     notEmpty: true,
-    isFloat: true,
+    isFloat: {
+      options: {
+        min: 0,
+      }
+    },
     errorMessage: "price can not be empty, and can only be a number",
   },
   quantityInstock: {
@@ -204,9 +209,10 @@ export const createOrderSchema = {
     isInt: {
       options: {
         min: 0,
+        max: 2000,
       }
     },
-    errorMessage: "Order amount field can not be empty"
+    errorMessage: "Order amount field can not be empty and cannot be over 2000"
   },
   orderStatus: {
     notEmpty: true,
@@ -258,9 +264,10 @@ export const createOrderDetailsSchema = {
     isInt: {
       options: {
         min: 1,
+        max: 10,
       }
     },
-    errorMessage: "quantity cannot be empty, and must bigger or equal than 1"
+    errorMessage: "quantity cannot be empty, and must between 1 to 10"
   },
 
   priceEach: {
