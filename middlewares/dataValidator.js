@@ -209,7 +209,7 @@ export const createOrderSchema = {
     isInt: {
       options: {
         min: 0,
-        max: 2000,
+        max: 200000,
       }
     },
     errorMessage: "Order amount field can not be empty and cannot be over 2000"
