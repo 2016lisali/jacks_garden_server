@@ -55,9 +55,7 @@ the server will be running on http://localhost:5000
 
 ## Road Map
 
-- Limit login attempts
-- access token and refresh token
-- store token in cookies instead of localstorage
-- generate different salt for each user password
-- auth service such as firebase autho,
-- graphQL
+- generate different salt for each user password (31-05-2022)
+- Limit login attempts (30-06-2022)
+- store token in cookies instead of localstorage (31-07-2022)
+- inventory management
