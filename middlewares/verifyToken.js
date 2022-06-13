@@ -22,7 +22,7 @@ export const verifyToken = (req, res, next) => {
 // check if the user is the cart owner
 export const verifyTokenAndAuthentication = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user?.userId === req.params.userId || req.user?.isAdmin) {
+    if (req.user?.userId === req.params.userId) {
       next()
     } else {
       res.status(403).json("You are not authenticated.")
@@ -33,13 +33,27 @@ export const verifyTokenAndAuthentication = (req, res, next) => {
 // const ip_white_list = ['127.0.0.1', '10.1.90.162', '10.1.16.81']
 // check if the user is admin and if the ip address is in the ip white list
 export const verifyTokenAndAdmin = (req, res, next) => {
-  verifyToken(req, res, () => {
-    // if the ip address of request inside the ip white list
-    // if (req.user?.isAdmin && ip_white_list.includes(req.ip) !== -1) {
-    if (req.user?.isAdmin) {
-      next()
-    } else {
-      res.status(403).json("You are not authenticated.")
-    }
-  })
+  const authHeader = req.headers.token;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
+      if (user.isAdmin === 1) {
+        req.user = user;
+        next()
+      } else {
+        res.status(403).json("You are not authenticated.")
+      }
+    })
+  } else {
+    res.status(403).json("You are not authenticated.")
+  }
+  // verifyToken(req, res, () => {
+  //   // if the ip address of request inside the ip white list
+  //   // if (req.user?.isAdmin && ip_white_list.includes(req.ip) !== -1) {
+  //   if (req.user?.isAdmin) {
+  //     next()
+  //   } else {
+  //     res.status(403).json("You are not authenticated.")
+  //   }
+  // })
 }

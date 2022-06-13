@@ -21,7 +21,11 @@ app.use(express.urlencoded({
 }));
 
 // allow cross origin resource sharing and restrict to a white list of Ip addresses
-const allowedOrigins = ['https://jacksgarden.netlify.app', 'https://jacksgardenadmin.netlify.app']
+const allowedOrigins = [
+  'https://jacksgarden.netlify.app',
+  'https://jacksgardenadmin.netlify.app',
+  // 'http://localhost:3001'
+]
 const corsOptions = {
   origin: allowedOrigins,
   optionsSuccessStatus: 200
