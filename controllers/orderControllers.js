@@ -2,6 +2,7 @@ import * as orderModel from "../models/orderModel.js";
 
 export const createOrder = async (req, res) => {
   const order = req.body;
+  if (order.userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await orderModel.createOrder(order.userId, order.orderDate, order.orderAmount, order.orderStatus, order.localPickup, order.comments)
     res.status(201).json(result)
@@ -13,6 +14,7 @@ export const createOrder = async (req, res) => {
 
 export const createOrderDetails = async (req, res) => {
   const order = req.body;
+  if (order.userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await orderModel.createOrderDetails(order.orderId, order.productId, order.quantity, order.priceEach)
     res.status(201).json(result)
@@ -24,6 +26,7 @@ export const createOrderDetails = async (req, res) => {
 
 export const createOrderBillingDetails = async (req, res) => {
   const details = req.body;
+  if (details.userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await orderModel.createOrderBillingDetails(details.orderId, details.name, details.email, details.phone, details.line1, details.line2, details.city, details.state, details.postal_code)
     res.status(201).json(result)
@@ -36,9 +39,13 @@ export const createOrderBillingDetails = async (req, res) => {
 export const getOrderDetails = async (req, res) => {
   try {
     const result = await orderModel.getOrderDetails(req.params.id);
-    result.length > 0 ?
-      res.status(200).json(result) :
+    if (result.length > 0 && (result[0].userId == req.user.userId || req.user.isAdmin == 1)) {
+      res.status(200).json(result)
+    } else if (result.length > 0 && (result[0].userId != req.user.userId)) {
+      res.status(403).json("You are not authorized")
+    } else {
       res.status(404).json("Order not found")
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json("Can not get order details, query error")
@@ -46,6 +53,7 @@ export const getOrderDetails = async (req, res) => {
 }
 
 export const getOrdersByUserId = async (req, res) => {
+  if (req.params.id != req.user.userId && req.user.isAdmin != 1) return res.status(403).json("You are not authorized")
   try {
     const result = await orderModel.getOrdersByUserId(req.params.id);
     result.length > 0 ?

@@ -2,6 +2,7 @@ import * as cartModel from "../models/cartModel.js";
 
 export const createCart = async (req, res) => {
   const userId = req.query.userId
+  if (userId != req.user.userId && req.user.isAdmin != 1) return res.status(403).json("You are not authorized")
   try {
     const result = await cartModel.createCart(userId)
     res.status(201).json(result.insertId);
@@ -12,6 +13,7 @@ export const createCart = async (req, res) => {
 }
 
 export const getCartDetailsByUserId = async (req, res) => {
+  if (req.query.userId != req.user.userId && req.user.isAdmin != 1) return res.status(403).json("You are not authorized")
   try {
     const result = await cartModel.getCartDetailsByUserId(req.query.userId)
     res.status(200).json(result)
@@ -22,7 +24,8 @@ export const getCartDetailsByUserId = async (req, res) => {
 }
 
 export const addCartDetails = async (req, res) => {
-  const { cartId, productId, quantity } = req.body;
+  const { cartId, userId, productId, quantity } = req.body;
+  if (userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await cartModel.addCartDetails(
       cartId,
@@ -36,7 +39,8 @@ export const addCartDetails = async (req, res) => {
 }
 
 export const updateCartDetails = async (req, res) => {
-  const { quantity, cartId, productId } = req.body;
+  const { quantity, cartId, userId, productId } = req.body;
+  if (userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await cartModel.updateCartDetails(
       quantity,
@@ -54,6 +58,7 @@ export const updateCartDetails = async (req, res) => {
 export const deleteProductInCart = async (req, res) => {
   const cartId = req.params.id
   const productId = req.query.productId;
+  if (req.body.userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await cartModel.deleteProductInCart(cartId, productId)
     if (result.affectedRows > 0) return res.status(200).json("Product has been deleted")
@@ -65,6 +70,7 @@ export const deleteProductInCart = async (req, res) => {
 }
 
 export const emptyCart = async (req, res) => {
+  if (req.body.userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await cartModel.emptyCart(req.params.id);
     if (result.affectedRows > 0) return res.status(200).json("Cart already emptied")
