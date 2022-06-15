@@ -40,6 +40,8 @@ export const addCartDetails = async (req, res) => {
 
 export const updateCartDetails = async (req, res) => {
   const { quantity, cartId, userId, productId } = req.body;
+  console.log("userId", userId);
+  console.log("req.user.userId", req.user.userId);
   if (userId != req.user.userId) return res.status(403).json("You are not authorized")
   try {
     const result = await cartModel.updateCartDetails(
