@@ -131,9 +131,7 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );
-    res.cookie(
-      'token',
-      token,
+    res.cookie('token', token,
       {
         sameSite: 'None',
         expires: new Date(new Date().getTime() + 2 * 60 * 60 * 1000),
