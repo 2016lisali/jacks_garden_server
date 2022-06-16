@@ -137,6 +137,7 @@ export const login = async (req, res) => {
       {
         sameSite: 'None',
         expires: new Date(new Date().getTime() + 2 * 60 * 60 * 1000),
+        path: '/',
         httpOnly: true,
         secure: true
       })
