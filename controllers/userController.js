@@ -136,6 +136,7 @@ export const login = async (req, res) => {
         sameSite: 'None',
         maxAge: 1000 * 60 * 60 * 2,
         path: '/',
+        domain: req.headers.origin,
         httpOnly: true,
         secure: true
       })
