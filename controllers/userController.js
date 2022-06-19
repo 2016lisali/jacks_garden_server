@@ -131,12 +131,13 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );
+    console.log("req.headers.origin", req.headers.origin);
     res.cookie('token', token,
       {
         sameSite: 'None',
         maxAge: 1000 * 60 * 60 * 2,
         path: '/',
-        domain: req.headers.origin,
+        // domain: req.headers.origin,
         httpOnly: true,
         secure: true
       })
