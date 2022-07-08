@@ -11,7 +11,6 @@ import { dayRateLimiter, speedLimiter } from './middlewares/rateLimit.js';
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-
 const app = express();
 const PORT = process.env.PORT || 5000
 
@@ -29,7 +28,8 @@ app.use(cookieParser())
 const allowedOrigins = [
   'https://jacksgarden.netlify.app',
   'https://jacksgardenadmin.netlify.app',
-  'http://localhost:3001'
+  'http://localhost:3001',
+  'https://jacksgardentest.netlify.app'
 ]
 const corsOptions = {
   credentials: true,
@@ -37,12 +37,11 @@ const corsOptions = {
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
-// app.use(cors());
 app.use("/images", express.static("images"))
-
 //rate limiter
 app.use('/api/', dayRateLimiter)
 app.use('/api/', speedLimiter)
+
 app.use("/api/users", usersRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/carts", cartsRoutes);
