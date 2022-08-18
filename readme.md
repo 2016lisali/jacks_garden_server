@@ -23,14 +23,14 @@ You can find the e-shop code on [https://github.com/2016lisali/jacks_garden](htt
 ```
 
 4. Create a `.env` file in root folder and enter following fields for cloud database
-   ```env
-   JWT_SECRET = YOUR_JWT_SECRET
-   STRIPE_TEST_KEY = YOUR_STRIPE_KEY
-   HOST = YOUR_DB_HOST
-   DBUSER = YOUR_DB_USER
-   PASSWORD = YOUR_DB_PASSWORD
-   DATABASE = YOUR_DB_NAME
-   ```
+    ```env
+    JWT_SECRET = YOUR_JWT_SECRET
+    STRIPE_TEST_KEY = YOUR_STRIPE_KEY
+    HOST = YOUR_DB_HOST
+    DBUSER = YOUR_DB_USER
+    PASSWORD = YOUR_DB_PASSWORD
+    DATABASE = YOUR_DB_NAME
+    ```
 5. In editor terminal run
 
 ```
@@ -41,21 +41,21 @@ the server will be running on http://localhost:5000
 
 ## Technologies
 
-- node
-- express
-- mysql2
-- jasonwebtoken
-- multer
-- stripe
-- bcypt
-- express-validator
-- express-rate-limit
-- express-slow-down
-- cors
+-   node
+-   express
+-   mysql2
+-   jasonwebtoken
+-   multer
+-   stripe
+-   bcypt
+-   express-validator
+-   express-rate-limit
+-   express-slow-down
+-   cors
 
 ## Road Map
 
-- [x] generate different salt for each user password (31-05-2022)
-- [x] store token in cookies instead of localStorage (31-06-2022)
-- [ ] Limit login attempts (30-06-2022)
-- [ ] inventory management (31-08-2022)
+-   [x] generate different salt for each user password (31-05-2022)
+-   [x] store token in cookies instead of localStorage (31-06-2022)
+-   [ ] Limit login attempts (30-06-2022)
+-   [ ] inventory management (31-08-2022)
