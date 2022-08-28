@@ -1,9 +1,16 @@
 import express from "express";
+import { checkSchema } from "express-validator";
+
 import {
     verifyToken,
     verifyTokenAndAuthentication,
-    verifyTokenAndAdmin,
 } from "../middlewares/verifyToken.js";
+import { insertLog } from "../middlewares/logging.js";
+import {
+    validate,
+    createCartSchema,
+    createCartDetailsSchema,
+} from "../middlewares/dataValidator.js";
 import {
     addCartDetails,
     updateCartDetails,
@@ -12,21 +19,16 @@ import {
     emptyCart,
     createCart,
 } from "../controllers/cartController.js";
-import { insertLog } from "../middlewares/logging.js";
-import { checkSchema } from "express-validator";
-import {
-    validate,
-    createCartSchema,
-    createCartDetailsSchema,
-} from "../middlewares/dataValidator.js";
 
 const router = express.Router();
+
 router.get(
     "/search",
     verifyTokenAndAuthentication,
     insertLog,
     getCartDetailsByUserId
 );
+
 router.post(
     "/details",
     verifyTokenAndAuthentication,
@@ -34,6 +36,7 @@ router.post(
     validate(checkSchema(createCartDetailsSchema)),
     addCartDetails
 );
+
 router.post(
     "/",
     verifyToken,
@@ -41,6 +44,7 @@ router.post(
     validate(checkSchema(createCartSchema)),
     createCart
 );
+
 router.patch(
     "/:id",
     verifyTokenAndAuthentication,
@@ -48,12 +52,14 @@ router.patch(
     validate(checkSchema(createCartDetailsSchema)),
     updateCartDetails
 );
+
 router.delete(
     "/:id/product",
     verifyTokenAndAuthentication,
     insertLog,
     deleteProductInCart
 );
+
 router.delete("/:id", verifyTokenAndAuthentication, insertLog, emptyCart);
 
 export default router;
