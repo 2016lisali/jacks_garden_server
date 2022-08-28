@@ -25,7 +25,7 @@ export const verifyTokenAndAuthentication = (req, res, next) => {
             if (error) {
                 req.user = { userId: 0, isAdmin: 0 };
                 res.status(403).json("Token is invalid");
-            } else if (user.userId == 144 || user.userId == 39) {
+            } else if (user.userId === 144 || user.userId === 39) {
                 if (req.method === "GET") {
                     req.user = user;
                     next();
@@ -54,20 +54,20 @@ export const verifyTokenAndAdmin = (req, res, next) => {
                 res.status(403).json("Token is invalid");
             } else if (
                 user.isAdmin === 1 &&
-                user.userId != 144 &&
-                user.userId != 39
+                user.userId !== 144 &&
+                user.userId !== 39
             ) {
                 req.user = user;
                 next();
             } else if (
                 user.isAdmin === 1 &&
-                (user.userId == 144 || user.userId == 39)
+                (user.userId === 144 || user.userId === 39)
             ) {
                 req.method === "GET"
                     ? next()
                     : res
-                          .status(403)
-                          .json("Only get requests allowed for test account");
+                        .status(403)
+                        .json("Only get requests allowed for test account");
             } else {
                 res.status(403).json("You are not authenticated.");
             }
