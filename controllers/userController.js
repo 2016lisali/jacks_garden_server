@@ -8,13 +8,13 @@ export const createUser = async (req, res) => {
     const user = req.body;
     let data;
     try {
-        // check if email already registered
+        // check if the email has already been registered
         const existingUser = await userModel.getUserBySearch(user.email);
         if (existingUser.length > 0)
             return res.status(400).json("User already exist.");
         if (user.password != user.confirmPassword)
             return res.status(400).json("Password must match");
-        // hash the password before insert it into database
+        // hash the password before inserting it into database
         const hashedPassword = bcrypt.hashSync(
             user.password,
             Math.round((Math.random() + 1) * 10)
@@ -47,7 +47,7 @@ export const getAllUsers = async (req, res) => {
         res.status(200).json(data);
     } catch (error) {
         console.log(error);
-        res.status(500).json("get all users query error");
+        res.status(500).json("query error with getAllUsers ");
     }
 };
 
@@ -55,7 +55,7 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         const data = await userModel.getUserById(req.params.id);
-        if (data[0].userId == req.user.userId || req.user.isAdmin == 1) {
+        if (data[0].userId === req.user.userId || req.user.isAdmin === 1) {
             res.status(200).json(data);
         } else {
             res.status(403).json("You are not authorized");
@@ -65,9 +65,8 @@ export const getUserById = async (req, res) => {
         res.status(500).json("getUserById query error");
     }
 };
-//
+// get user by search email/first name/last name
 export const getUserBySearch = async (req, res) => {
-    // not sure here should use req.body or req.params.email
     const { name, email } = req.query;
     const firstName = name?.split(" ")[0];
     const lastName = name?.split(" ")[1];
@@ -81,8 +80,8 @@ export const getUserBySearch = async (req, res) => {
         data.length > 0
             ? res.status(200).json(data)
             : res
-                  .status(404)
-                  .json("Can not find the user matching your search");
+                .status(404)
+                .json("Can not find the user matching your search");
     } catch (error) {
         console.log(error);
         res.status(500).json("getUserBySearch query error");
@@ -92,7 +91,7 @@ export const getUserBySearch = async (req, res) => {
 // update user
 export const updateUser = async (req, res) => {
     const user = req.body;
-    if (user.userId !== req.user.userId && req.user.isAdmin != 1)
+    if (user.userId !== req.user.userId && req.user.isAdmin !== 1)
         return res.status(403).json("You are not authorized");
     let hashedPassword = user.password;
     !user.password.startsWith("$2b$") &&
