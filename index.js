@@ -32,6 +32,7 @@ const allowedOrigins = [
     "https://jacksgardenadmin.netlify.app",
     "http://localhost:3001",
     "https://jacksgardentest.netlify.app",
+    "https://jacksgardenadmintest.netlify.app/"
 ];
 const corsOptions = {
     credentials: true,
